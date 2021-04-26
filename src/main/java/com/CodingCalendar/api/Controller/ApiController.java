@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.CodingCalendar.api.entities.Contest;
 import com.CodingCalendar.api.services.ContestService;
+import com.CodingCalendar.api.CodeChef.DataScrapper;
 
 
 
@@ -19,9 +20,17 @@ public class ApiController {
 	private ContestService contestService;
 	
 	@GetMapping("/test")
-	public List<Contest> test() {
+//	public List<Contest> test() {
+//		
+//		return this.contestService.getContests();
+//		
+//	}
+	
+	public String test() {
 		
-		return this.contestService.getContests();
+		DataScrapper data= new DataScrapper();
+		
+		return data.Data();
 		
 	}
 	
