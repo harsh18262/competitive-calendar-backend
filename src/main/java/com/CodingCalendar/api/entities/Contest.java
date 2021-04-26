@@ -4,33 +4,27 @@ import java.util.Date;
 
 public class Contest {
 	
-	private long id;
+	
 	private String platform;
 	private String Name;
 	private Date Start_time;
 	private Date End_time;
-	public Contest(long id, String platform, String name, Date start_time, Date end_time) {
+	public Contest(String platform, String name, Date start_time, Date end_time) {
 		super();
-		this.id = id;
 		this.platform = platform;
 		Name = name;
 		Start_time = start_time;
 		End_time = end_time;
 	}
-	@Override
-	public String toString() {
-		return "Contest [id=" + id + ", platform=" + platform + ", Name=" + Name + ", Start_time=" + Start_time
-				+ ", End_time=" + End_time + "]";
-	}
 	public Contest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
+	@Override
+	public String toString() {
+		return "Contest [platform=" + platform + ", Name=" + Name + ", Start_time=" + Start_time + ", End_time="
+				+ End_time + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
 	}
 	public String getPlatform() {
 		return platform;
