@@ -1,5 +1,7 @@
 package com.CodingCalendar.api.entities;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Contest {
@@ -9,12 +11,29 @@ public class Contest {
 	private String Name;
 	private Date Start_time;
 	private Date End_time;
-	public Contest(String platform, String name, Date start_time, Date end_time) {
+	public Contest(String platform, String name, String start_time, String end_time) {
 		super();
 		this.platform = platform;
 		Name = name;
-		Start_time = start_time;
-		End_time = end_time;
+		SimpleDateFormat formatter1=new SimpleDateFormat("dd MMM yyy\nHH:mm:ss");  
+	    Date sdatetime;
+		try {
+			sdatetime = formatter1.parse(start_time);
+			Start_time = sdatetime;
+		} catch (ParseException e1) {
+			
+			e1.printStackTrace();
+		}  
+	    Date edatetime;
+		try {
+			edatetime = formatter1.parse(end_time);
+			End_time = edatetime;
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
 	}
 	public Contest() {
 		super();
