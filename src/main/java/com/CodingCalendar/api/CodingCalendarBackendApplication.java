@@ -1,0 +1,13 @@
+package com.CodingCalendar.api;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class CodingCalendarBackendApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CodingCalendarBackendApplication.class, args);
+	}
+
+}
