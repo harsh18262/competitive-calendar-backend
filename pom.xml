@@ -48,7 +48,13 @@
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>3.141.59</version>
-    </dependency>
+    	</dependency>
+     	<dependency>  
+ 			<groupId>com.google.firebase</groupId>  
+ 			<artifactId>firebase-admin</artifactId>  
+ 			<version>6.11.0</version>  
+ 		</dependency>  
+    
 	</dependencies>
 
 	<build>
