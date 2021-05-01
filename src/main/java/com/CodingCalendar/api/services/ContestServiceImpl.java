@@ -13,12 +13,13 @@ public class ContestServiceImpl implements ContestService {
 
 	
 	@Override
-	public List<Contest> getContests() {
+	public Iterable<Contest> getContests() {
 		CodeChefDataScrapper Data=new CodeChefDataScrapper();
 		
 		List<Contest> list=Data.Data();
+		Iterable<Contest> iterablelist=list;
 	
-		return list;
+		return iterablelist;
 	}
 
 }

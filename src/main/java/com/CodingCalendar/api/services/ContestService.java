@@ -8,7 +8,7 @@ import com.CodingCalendar.api.entities.Contest;
 
 public interface ContestService {
 	
-	public List<Contest> getContests();
+	public Iterable<Contest> getContests();
 	
 
 }

@@ -1,18 +1,28 @@
 package com.CodingCalendar.api.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Contest_old {
+@Entity
+@Table(name = "competitivecalendarnew")
+public class Contest {
 	
-	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer id;
 	private String platform;
 	private String Name;
 	private Date Start_time;
 	private Date End_time;
 	
-	public Contest_old(String platform, String name, String start_time, String end_time) {
+	public Contest(String platform, String name, String start_time, String end_time) {
 		super();
 		this.platform = platform;
 		Name = name;
@@ -36,16 +46,21 @@ public class Contest_old {
 		
 		
 	}
-	public Contest_old() {
+	public Contest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	@Override
 	public String toString() {
-		return "Contest [platform=" + platform + ", Name=" + Name + ", Start_time=" + Start_time + ", End_time="
-				+ End_time + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+		return "ContestSQL [id=" + id + ", platform=" + platform + ", Name=" + Name + ", Start_time=" + Start_time
+				+ ", End_time=" + End_time + ", getId()=" + getId() + ", getPlatform()=" + getPlatform()
+				+ ", getName()=" + getName() + ", getStart_time()=" + getStart_time() + ", getEnd_time()="
+				+ getEnd_time() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
 				+ super.toString() + "]";
 	}
+	
+	
 	public String getPlatform() {
 		return platform;
 	}
@@ -71,5 +86,11 @@ public class Contest_old {
 		End_time = end_time;
 	}
 	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 }
