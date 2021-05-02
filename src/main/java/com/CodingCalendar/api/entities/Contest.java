@@ -5,9 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -17,33 +14,17 @@ public class Contest {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	private String platform;
+	private String Platform;
 	private String Name;
 	private Date Start_time;
 	private Date End_time;
 	
-	public Contest(String platform, String name, String start_time, String end_time) {
+	public Contest(String platform, String name, Date start_time, Date end_time) {
 		super();
-		this.platform = platform;
+		Platform = platform;
 		Name = name;
-		SimpleDateFormat formatter1=new SimpleDateFormat("dd MMM yyy\nHH:mm:ss");  
-	    Date sdatetime;
-		try {
-			sdatetime = formatter1.parse(start_time);
-			Start_time = sdatetime;
-		} catch (ParseException e1) {
-			
-			e1.printStackTrace();
-		}  
-	    Date edatetime;
-		try {
-			edatetime = formatter1.parse(end_time);
-			End_time = edatetime;
-		} catch (ParseException e) {
-			
-			e.printStackTrace();
-		}
-		
+		Start_time = start_time;
+		End_time = end_time;
 		
 	}
 	public Contest() {
@@ -53,7 +34,7 @@ public class Contest {
 	
 	@Override
 	public String toString() {
-		return "ContestSQL [id=" + id + ", platform=" + platform + ", Name=" + Name + ", Start_time=" + Start_time
+		return "ContestSQL [id=" + id + ", platform=" + Platform + ", Name=" + Name + ", Start_time=" + Start_time
 				+ ", End_time=" + End_time + ", getId()=" + getId() + ", getPlatform()=" + getPlatform()
 				+ ", getName()=" + getName() + ", getStart_time()=" + getStart_time() + ", getEnd_time()="
 				+ getEnd_time() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
@@ -62,10 +43,10 @@ public class Contest {
 	
 	
 	public String getPlatform() {
-		return platform;
+		return Platform;
 	}
 	public void setPlatform(String platform) {
-		this.platform = platform;
+		Platform = platform;
 	}
 	public String getName() {
 		return Name;
