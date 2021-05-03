@@ -39,8 +39,8 @@ public class CodeChefDataScrapper {
     for (int i = 0; i < contest.size(); i += 4) {
     	 String Name = contest.get(i + 1).getText();
 		 Date Start_date =Format_Date(contest.get(i + 2).getText());
-		 Date End_date = Format_Date(contest.get(i + 3).getText());;
-		 ContestList.add(new Contest("CodeChef", Name ,Start_date , End_date));
+		 Date End_date = Format_Date(contest.get(i + 3).getText());
+		 //ContestList.add(new Contest("CodeChef", Name ,Start_date , End_date));
 
     }
 
@@ -145,7 +145,8 @@ public class CodeChefDataScrapper {
 			 String Name = (String) contest.get("name");
 			 Date Start_date = format_date((String)contest.get("startDate"));
 			 Date End_date = format_date((String)contest.get("endDate"));
-			 ContestList.add(new Contest("CodeChef", Name, Start_date,End_date));
+			 String Code = (String)contest.get("code");
+			 ContestList.add(new Contest("CodeChef", Name, Start_date,End_date,Code));
 			
 		 }
 		

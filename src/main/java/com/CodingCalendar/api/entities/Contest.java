@@ -18,14 +18,21 @@ public class Contest {
 	private String Name;
 	private Date Start_time;
 	private Date End_time;
+	private String Code;
 	
-	public Contest(String platform, String name, Date start_time, Date end_time) {
+	public Contest(String platform, String name, Date start_time, Date end_time,String code) {
 		super();
 		Platform = platform;
 		Name = name;
 		Start_time = start_time;
 		End_time = end_time;
-		
+		Code = code;
+	}
+	public String getCode() {
+		return Code;
+	}
+	public void setCode(String code) {
+		Code = code;
 	}
 	public Contest() {
 		super();
@@ -34,11 +41,11 @@ public class Contest {
 	
 	@Override
 	public String toString() {
-		return "ContestSQL [id=" + id + ", platform=" + Platform + ", Name=" + Name + ", Start_time=" + Start_time
-				+ ", End_time=" + End_time + ", getId()=" + getId() + ", getPlatform()=" + getPlatform()
-				+ ", getName()=" + getName() + ", getStart_time()=" + getStart_time() + ", getEnd_time()="
-				+ getEnd_time() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-				+ super.toString() + "]";
+		return "Contest [id=" + id + ", Platform=" + Platform + ", Name=" + Name + ", Start_time=" + Start_time
+				+ ", End_time=" + End_time + ", Code=" + Code + ", getCode()=" + getCode() + ", getPlatform()="
+				+ getPlatform() + ", getName()=" + getName() + ", getStart_time()=" + getStart_time()
+				+ ", getEnd_time()=" + getEnd_time() + ", getId()=" + getId() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 	
 	

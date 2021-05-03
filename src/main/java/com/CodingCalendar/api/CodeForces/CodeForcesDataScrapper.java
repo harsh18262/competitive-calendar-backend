@@ -73,7 +73,7 @@ public class CodeForcesDataScrapper {
 				 	 String Name = (String) jsonobj_1.get("name");
 					 Date Start_date = epoch2date((Long)(jsonobj_1.get("startTimeSeconds")));
 					 Date End_date = epoch2date( (Long)(jsonobj_1.get("startTimeSeconds")) + (Long)(jsonobj_1.get("durationSeconds")));
-					 ContestList.add(new Contest("CodeForces", Name, Start_date,End_date));
+					// ContestList.add(new Contest("CodeForces", Name, Start_date,End_date));
 					 }
 					
 				 }
@@ -114,7 +114,8 @@ public class CodeForcesDataScrapper {
 			 	 String Name = (String) contest.get("name");
 				 Date Start_date = epoch2date((Long)(contest.get("startTimeSeconds")));
 				 Date End_date = epoch2date( (Long)(contest.get("startTimeSeconds")) + (Long)(contest.get("durationSeconds")));
-				 ContestList.add(new Contest("CodeForces", Name, Start_date,End_date));
+				 String Code =(String) contest.get("id");
+				 ContestList.add(new Contest("CodeForces", Name, Start_date,End_date,Code));
 				 }
 				
 			 }
