@@ -22,7 +22,7 @@ public class ContestServiceImpl implements ContestService {
 	public Iterable<Contest> getContests() {
 		CodeChefDataScrapper Data=new CodeChefDataScrapper();
 		
-		List<Contest> list=Data.Data();
+		List<Contest> list=Data.Data_api();
 		Iterable<Contest> iterablelist=list;
 	
 		return iterablelist;
@@ -32,7 +32,7 @@ public class ContestServiceImpl implements ContestService {
 	public List<Contest> getCodechef() {
 		CodeChefDataScrapper Codechef= new CodeChefDataScrapper();
 		
-		return Codechef.Data();
+		return Codechef.Data_api();
 	}
 
 	@Override

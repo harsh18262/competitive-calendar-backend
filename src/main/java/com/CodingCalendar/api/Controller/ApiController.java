@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.CodingCalendar.api.CodeChef.CodeChefDataScrapper;
 import com.CodingCalendar.api.entities.Contest;
 import com.CodingCalendar.api.entities.ContestRepository;
 import com.CodingCalendar.api.services.ContestService;
@@ -43,11 +44,9 @@ public class ApiController {
 	@GetMapping("/test")
 	public List<Contest> test() 
 	{
+		CodeChefDataScrapper codechef = new CodeChefDataScrapper(); 
 		
-		
-		
-		
-		return contestService.getCodeforces();
+		return codechef.Data_api();
 		
 	}
 	
@@ -57,6 +56,14 @@ public class ApiController {
 		
 		return contestRepo.findAll();
 	}
+	@GetMapping("/sqltest/delete")
+	 public @ResponseBody String deleteallcontests() 
+	{
+		
+		 contestRepo.deleteAll();
+		 return "Deleted all the entries";
+	}
+	
 	
 	
 

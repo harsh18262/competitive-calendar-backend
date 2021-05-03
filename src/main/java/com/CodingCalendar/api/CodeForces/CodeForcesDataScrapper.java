@@ -109,7 +109,7 @@ public class CodeForcesDataScrapper {
 	 {
 			String key = System.getenv("CODEFORCES_KEY");
 			String secret=System.getenv("CODEFORCES_SECRET");
-
+			
 		 	long Time=System.currentTimeMillis()/1000;
 			String site="https://codeforces.com/api/";
 			String method="contest.list?";
@@ -125,11 +125,7 @@ public class CodeForcesDataScrapper {
 		
 	 public Date epoch2date(Long unix_seconds) {
 		 	
-		 	Date date =  new Date(unix_seconds* 1000 );
-		 	SimpleDateFormat jdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		 	String java_date = jdf.format(date);
-		 	System.out.println(java_date);
-		 	
+		 	Date date =  new Date(unix_seconds* 1000 );	
 		 	return date;
 		 
 	 }
