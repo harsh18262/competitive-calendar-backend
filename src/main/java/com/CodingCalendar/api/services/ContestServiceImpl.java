@@ -39,10 +39,7 @@ public class ContestServiceImpl implements ContestService {
 	public List<Contest> getCodeforces() {
 		CodeForcesDataScrapper CodeForces =new CodeForcesDataScrapper();
 		
-		List<Contest> url=CodeForces.Data();
-		
-		
-		return url;
+		return CodeForces.Data_new();
 		
 	}
 	

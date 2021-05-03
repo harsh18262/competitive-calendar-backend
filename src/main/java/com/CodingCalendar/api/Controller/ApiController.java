@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.CodingCalendar.api.CodeChef.CodeChefDataScrapper;
+import com.CodingCalendar.api.CodeForces.CodeForcesDataScrapper;
 import com.CodingCalendar.api.entities.Contest;
 import com.CodingCalendar.api.entities.ContestRepository;
 import com.CodingCalendar.api.services.ContestService;
@@ -45,8 +46,9 @@ public class ApiController {
 	public List<Contest> test() 
 	{
 		CodeChefDataScrapper codechef = new CodeChefDataScrapper(); 
+		CodeForcesDataScrapper codeforce = new CodeForcesDataScrapper();
 		
-		return codechef.Data_api();
+		return codeforce.Data_new();
 		
 	}
 	
@@ -75,7 +77,7 @@ public class ApiController {
 		
 		if(Platform.equalsIgnoreCase("codechef"))
 		{
-		ContestList = contestService.getCodechef();
+			ContestList = contestService.getCodechef();
 		}
 		else if(Platform.equalsIgnoreCase("codeforces"))
 		{

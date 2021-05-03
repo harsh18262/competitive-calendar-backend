@@ -10,12 +10,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-
+import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import com.CodingCalendar.api.entities.Contest;
+import com.goebl.david.Webb;
 
 
 
@@ -23,7 +24,7 @@ import com.CodingCalendar.api.entities.Contest;
 public class CodeForcesDataScrapper {
 	
 	
-	
+	//Old function to get contestlist
 	public List < Contest > Data()
 	{
 
@@ -87,7 +88,43 @@ public class CodeForcesDataScrapper {
 	
 	}
 	
-	 public static String getSHA512(String input)
+	public List <Contest> Data_new(){
+		
+		  Webb webb =Webb.create();
+		 		  
+			org.json.JSONObject response = webb                                                       
+			          .get(generateapiurl())
+			          .ensureSuccess()
+			          .asJsonObject()
+			          .getBody();
+			
+			 List < Contest > ContestList;
+			 ContestList = new ArrayList<>();
+			 
+			 JSONArray contestArray=(JSONArray)convert_2_simplejson(response);
+			 System.out.println("Result is");
+			 System.out.println(contestArray);
+
+			 for(int i=0;i<contestArray.size();i++)
+			 {
+
+				 JSONObject contest = (JSONObject)contestArray.get(i);
+				 if(contest.get("phase").equals("BEFORE")) 
+				 {
+			 	 String Name = (String) contest.get("name");
+				 Date Start_date = epoch2date((Long)(contest.get("startTimeSeconds")));
+				 Date End_date = epoch2date( (Long)(contest.get("startTimeSeconds")) + (Long)(contest.get("durationSeconds")));
+				 ContestList.add(new Contest("CodeForces", Name, Start_date,End_date));
+				 }
+				
+			 }
+			 return ContestList;
+			
+			
+		
+	}
+	
+	public static String getSHA512(String input)
 	 {
 
 			String toReturn = null;
@@ -129,4 +166,19 @@ public class CodeForcesDataScrapper {
 		 
 	 }
 	 
+	 public Object convert_2_simplejson(org.json.JSONObject responsetmp)
+		{
+				String responsestr=null;
+				
+				try {
+					responsestr = responsetmp.getString("result");
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				
+				
+				Object responseobj=(Object) JSONValue.parse(responsestr);
+				
+				return responseobj;
+		}
 }
