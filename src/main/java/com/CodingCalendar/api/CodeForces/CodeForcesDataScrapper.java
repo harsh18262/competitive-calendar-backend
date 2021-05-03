@@ -102,8 +102,6 @@ public class CodeForcesDataScrapper {
 			 ContestList = new ArrayList<>();
 			 
 			 JSONArray contestArray=(JSONArray)convert_2_simplejson(response);
-			 System.out.println("Result is");
-			 System.out.println(contestArray);
 
 			 for(int i=0;i<contestArray.size();i++)
 			 {
@@ -114,7 +112,7 @@ public class CodeForcesDataScrapper {
 			 	 String Name = (String) contest.get("name");
 				 Date Start_date = epoch2date((Long)(contest.get("startTimeSeconds")));
 				 Date End_date = epoch2date( (Long)(contest.get("startTimeSeconds")) + (Long)(contest.get("durationSeconds")));
-				 String Code =(String) contest.get("id");
+				 String Code =(contest.get("id").toString());
 				 ContestList.add(new Contest("CodeForces", Name, Start_date,End_date,Code));
 				 }
 				

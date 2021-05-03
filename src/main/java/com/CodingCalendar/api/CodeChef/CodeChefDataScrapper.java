@@ -70,7 +70,6 @@ public class CodeChefDataScrapper {
   {
 	  Webb webb =Webb.create();
 	  String token= "Bearer "+ token_gen();
-	  System.out.println(token);
 	  
 		org.json.JSONObject response = webb                                                       
 		          .get("https://api.codechef.com/contests")
