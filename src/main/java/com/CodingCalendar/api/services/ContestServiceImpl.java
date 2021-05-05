@@ -1,6 +1,7 @@
 package com.CodingCalendar.api.services;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.CodingCalendar.api.DataScrappers.CodeChef.CodeChef;
 import com.CodingCalendar.api.DataScrappers.CodeForces.CodeForces;
+import com.CodingCalendar.api.DataScrappers.HackerEarth.HackerEarth;
 import com.CodingCalendar.api.entities.Contest;
 import com.CodingCalendar.api.entities.ContestRepository;
 
@@ -19,29 +21,51 @@ public class ContestServiceImpl implements ContestService {
 	private ContestRepository contestRepo;
 	
 	@Override
-	public Iterable<Contest> getContests() {
-		CodeChef Data=new CodeChef();
+	public List<Contest> getallContests() {
+		CodeChef Codechef=new CodeChef();
+		CodeForces Codeforces =new CodeForces();
+		HackerEarth Hackerearth =new HackerEarth();
 		
-		List<Contest> list=Data.Data_api();
-		Iterable<Contest> iterablelist=list;
+		List<Contest> ContestList = new ArrayList<>();
+		
+		List<Contest> data=new ArrayList<>();
+		data=Codechef.data();
+		ContestList.addAll(data);
+		data=Codeforces.data();
+		ContestList.addAll(data);
+		data=Hackerearth.data();
+		ContestList.addAll(data);
+		
+		
+		
+		
 	
-		return iterablelist;
+		return ContestList;
 	}
 
 	@Override
 	public List<Contest> getCodechef() {
 		CodeChef Codechef= new CodeChef();
 		
-		return Codechef.Data_api();
+		return Codechef.data();
 	}
 
 	@Override
 	public List<Contest> getCodeforces() {
-		CodeForces CodeForces =new CodeForces();
+		CodeForces Codeforces =new CodeForces();
 		
-		return CodeForces.Data_new();
+		return Codeforces.data();
 		
 	}
+	
+	@Override
+	public List<Contest> getHackerearth() {
+		HackerEarth Hackerearth =new HackerEarth();
+		
+		return Hackerearth.data();
+
+	}
+
 	
 	int f;
 	@Override
@@ -68,5 +92,8 @@ public class ContestServiceImpl implements ContestService {
 		});
 		return "Updated";
 	}
+
+
+
 
 }

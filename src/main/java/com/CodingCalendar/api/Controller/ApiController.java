@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.CodingCalendar.api.DataScrappers.CodeChef.CodeChef;
 import com.CodingCalendar.api.DataScrappers.CodeForces.CodeForces;
+import com.CodingCalendar.api.DataScrappers.HackerEarth.HackerEarth;
 import com.CodingCalendar.api.entities.Contest;
 import com.CodingCalendar.api.entities.ContestRepository;
 import com.CodingCalendar.api.services.ContestService;
@@ -47,8 +48,9 @@ public class ApiController {
 	{
 		CodeChef codechef = new CodeChef(); 
 		CodeForces codeforce = new CodeForces();
+		HackerEarth hackerearth =new HackerEarth();
 		
-		return codeforce.Data_new();
+		return codeforce.data();
 		
 	}
 	
@@ -83,8 +85,15 @@ public class ApiController {
 		{
 			ContestList = contestService.getCodeforces();	
 		}
-		else
+		else if(Platform.equalsIgnoreCase("hackerearth"))
 		{
+			ContestList = contestService.getHackerearth();	
+		}
+		else if(Platform.equalsIgnoreCase("all"))
+		{
+			ContestList = contestService.getallContests();	
+		} 
+		else {
 			return "Platform not found or Wrong parameter";
 		}
 		

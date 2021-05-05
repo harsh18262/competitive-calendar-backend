@@ -11,6 +11,10 @@ import java.util.Date;
 @Table(name = "competitivecalendarnew")
 public class Contest {
 	
+	public Contest() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
@@ -18,37 +22,13 @@ public class Contest {
 	private String Name;
 	private Date Start_time;
 	private Date End_time;
-	private String Code;
-	
-	public Contest(String platform, String name, Date start_time, Date end_time,String code) {
-		super();
-		Platform = platform;
-		Name = name;
-		Start_time = start_time;
-		End_time = end_time;
-		Code = code;
+	private String Url;
+	public Integer getId() {
+		return id;
 	}
-	public String getCode() {
-		return Code;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-	public void setCode(String code) {
-		Code = code;
-	}
-	public Contest() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	@Override
-	public String toString() {
-		return "Contest [id=" + id + ", Platform=" + Platform + ", Name=" + Name + ", Start_time=" + Start_time
-				+ ", End_time=" + End_time + ", Code=" + Code + ", getCode()=" + getCode() + ", getPlatform()="
-				+ getPlatform() + ", getName()=" + getName() + ", getStart_time()=" + getStart_time()
-				+ ", getEnd_time()=" + getEnd_time() + ", getId()=" + getId() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
-	}
-	
-	
 	public String getPlatform() {
 		return Platform;
 	}
@@ -73,12 +53,28 @@ public class Contest {
 	public void setEnd_time(Date end_time) {
 		End_time = end_time;
 	}
-	
-	public Integer getId() {
-		return id;
+	public String getUrl() {
+		return Url;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setUrl(String url) {
+		Url = url;
+	}
+	public Contest(String platform, String name, Date start_time, Date end_time, String url) {
+		super();
+		Platform = platform;
+		Name = name;
+		Start_time = start_time;
+		End_time = end_time;
+		Url = url;
+	}
+	@Override
+	public String toString() {
+		return "Contest [id=" + id + ", Platform=" + Platform + ", Name=" + Name + ", Start_time=" + Start_time
+				+ ", End_time=" + End_time + ", Url=" + Url + ", getId()=" + getId() + ", getPlatform()="
+				+ getPlatform() + ", getName()=" + getName() + ", getStart_time()=" + getStart_time()
+				+ ", getEnd_time()=" + getEnd_time() + ", getUrl()=" + getUrl() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 
+		
 }

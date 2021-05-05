@@ -1,15 +1,10 @@
 package com.CodingCalendar.api.DataScrappers.CodeForces;
 
-import java.io.IOException;
 import java.math.BigInteger;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
-
 import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -25,70 +20,70 @@ public class CodeForces {
 	
 	
 	//Old function to get contestlist
-	public List < Contest > Data()
-	{
-
-		try {
-			URL url = new URL(generateapiurl());
-			HttpURLConnection conn = (HttpURLConnection)url.openConnection(); 
-			conn.setRequestMethod("GET");
-			conn.connect(); 
-			int responsecode = conn.getResponseCode(); 
-			if(responsecode != 200)
-			//throw new RuntimeException(“HttpResponseCode: “ +responsecode);
-			System.out.println("error");
-			else
-			{
-				String inline=new String();
-				Scanner sc;
-				try {
-	
-					sc = new Scanner(url.openStream());
-					while(sc.hasNext())
-					{
-						inline+=sc.nextLine();
-					}
-					sc.close();
-					
-				} 
-				catch (Exception e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				 List < Contest > ContestList;
-				 ContestList = new ArrayList<>();
-				 
-				 JSONObject jobj = (JSONObject)JSONValue.parse(inline);
-				 
-				 JSONArray jsonarr_1 = (JSONArray) jobj.get("result"); 
-
-				 for(int i=0;i<jsonarr_1.size();i++)
-				 {
-
-					 JSONObject jsonobj_1 = (JSONObject)jsonarr_1.get(i);
-					 if(jsonobj_1.get("phase").equals("BEFORE")) 
-					 {
-				 	 String Name = (String) jsonobj_1.get("name");
-					 Date Start_date = epoch2date((Long)(jsonobj_1.get("startTimeSeconds")));
-					 Date End_date = epoch2date( (Long)(jsonobj_1.get("startTimeSeconds")) + (Long)(jsonobj_1.get("durationSeconds")));
-					// ContestList.add(new Contest("CodeForces", Name, Start_date,End_date));
-					 }
-					
-				 }
-				 return ContestList;
-
-			}
-		} catch (IOException  e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	
-	}
-	
-	public List <Contest> Data_new(){
+//	public List < Contest > data_old()
+//	{
+//
+//		try {
+//			URL url = new URL(generateapiurl());
+//			HttpURLConnection conn = (HttpURLConnection)url.openConnection(); 
+//			conn.setRequestMethod("GET");
+//			conn.connect(); 
+//			int responsecode = conn.getResponseCode(); 
+//			if(responsecode != 200)
+//			//throw new RuntimeException(“HttpResponseCode: “ +responsecode);
+//			System.out.println("error");
+//			else
+//			{
+//				String inline=new String();
+//				Scanner sc;
+//				try {
+//	
+//					sc = new Scanner(url.openStream());
+//					while(sc.hasNext())
+//					{
+//						inline+=sc.nextLine();
+//					}
+//					sc.close();
+//					
+//				} 
+//				catch (Exception e)
+//				{
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
+//				 List < Contest > ContestList;
+//				 ContestList = new ArrayList<>();
+//				 
+//				 JSONObject jobj = (JSONObject)JSONValue.parse(inline);
+//				 
+//				 JSONArray jsonarr_1 = (JSONArray) jobj.get("result"); 
+//
+//				 for(int i=0;i<jsonarr_1.size();i++)
+//				 {
+//
+//					 JSONObject jsonobj_1 = (JSONObject)jsonarr_1.get(i);
+//					 if(jsonobj_1.get("phase").equals("BEFORE")) 
+//					 {
+//				 	 String Name = (String) jsonobj_1.get("name");
+//					 Date Start_date = epoch2date((Long)(jsonobj_1.get("startTimeSeconds")));
+//					 Date End_date = epoch2date( (Long)(jsonobj_1.get("startTimeSeconds")) + (Long)(jsonobj_1.get("durationSeconds")));
+//					// ContestList.add(new Contest("CodeForces", Name, Start_date,End_date));
+//					 }
+//					
+//				 }
+//				 return ContestList;
+//
+//			}
+//		} catch (IOException  e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return null;
+//	
+//	}
+//	
+	public List <Contest> data(){
 		
 		  Webb webb =Webb.create();
 		 		  
@@ -112,7 +107,7 @@ public class CodeForces {
 			 	 String Name = (String) contest.get("name");
 				 Date Start_date = epoch2date((Long)(contest.get("startTimeSeconds")));
 				 Date End_date = epoch2date( (Long)(contest.get("startTimeSeconds")) + (Long)(contest.get("durationSeconds")));
-				 String Code =(contest.get("id").toString());
+				 String Code ="https://codeforces.com/contestRegistration/"+(contest.get("id").toString());
 				 ContestList.add(new Contest("CodeForces", Name, Start_date,End_date,Code));
 				 }
 				
