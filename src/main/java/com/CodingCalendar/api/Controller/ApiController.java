@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.CodingCalendar.api.CodeChef.CodeChefDataScrapper;
-import com.CodingCalendar.api.CodeForces.CodeForcesDataScrapper;
+import com.CodingCalendar.api.DataScrappers.CodeChef.CodeChef;
+import com.CodingCalendar.api.DataScrappers.CodeForces.CodeForces;
 import com.CodingCalendar.api.entities.Contest;
 import com.CodingCalendar.api.entities.ContestRepository;
 import com.CodingCalendar.api.services.ContestService;
@@ -45,8 +45,8 @@ public class ApiController {
 	@GetMapping("/test")
 	public List<Contest> test() 
 	{
-		CodeChefDataScrapper codechef = new CodeChefDataScrapper(); 
-		CodeForcesDataScrapper codeforce = new CodeForcesDataScrapper();
+		CodeChef codechef = new CodeChef(); 
+		CodeForces codeforce = new CodeForces();
 		
 		return codeforce.Data_new();
 		

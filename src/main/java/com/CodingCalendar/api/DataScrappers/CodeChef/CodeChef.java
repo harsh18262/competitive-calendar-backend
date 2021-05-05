@@ -1,4 +1,4 @@
-package com.CodingCalendar.api.CodeChef;
+package com.CodingCalendar.api.DataScrappers.CodeChef;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,7 +21,7 @@ import com.CodingCalendar.api.WebDriverCreator;
 import com.CodingCalendar.api.entities.Contest;
 import com.goebl.david.Webb;
 
-public class CodeChefDataScrapper {
+public class CodeChef {
 
   public List < Contest > Data_old() 
   {

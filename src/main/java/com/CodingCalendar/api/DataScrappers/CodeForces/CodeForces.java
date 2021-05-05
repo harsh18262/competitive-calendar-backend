@@ -1,4 +1,4 @@
-package com.CodingCalendar.api.CodeForces;
+package com.CodingCalendar.api.DataScrappers.CodeForces;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -21,7 +21,7 @@ import com.goebl.david.Webb;
 
 
 
-public class CodeForcesDataScrapper {
+public class CodeForces {
 	
 	
 	//Old function to get contestlist

@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.CodingCalendar.api.CodeChef.CodeChefDataScrapper;
-import com.CodingCalendar.api.CodeForces.CodeForcesDataScrapper;
+import com.CodingCalendar.api.DataScrappers.CodeChef.CodeChef;
+import com.CodingCalendar.api.DataScrappers.CodeForces.CodeForces;
 import com.CodingCalendar.api.entities.Contest;
 import com.CodingCalendar.api.entities.ContestRepository;
 
@@ -20,7 +20,7 @@ public class ContestServiceImpl implements ContestService {
 	
 	@Override
 	public Iterable<Contest> getContests() {
-		CodeChefDataScrapper Data=new CodeChefDataScrapper();
+		CodeChef Data=new CodeChef();
 		
 		List<Contest> list=Data.Data_api();
 		Iterable<Contest> iterablelist=list;
@@ -30,14 +30,14 @@ public class ContestServiceImpl implements ContestService {
 
 	@Override
 	public List<Contest> getCodechef() {
-		CodeChefDataScrapper Codechef= new CodeChefDataScrapper();
+		CodeChef Codechef= new CodeChef();
 		
 		return Codechef.Data_api();
 	}
 
 	@Override
 	public List<Contest> getCodeforces() {
-		CodeForcesDataScrapper CodeForces =new CodeForcesDataScrapper();
+		CodeForces CodeForces =new CodeForces();
 		
 		return CodeForces.Data_new();
 		
