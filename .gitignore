@@ -35,3 +35,4 @@ build/
 ### Secrets ###
 secrets.sh
 secrets_windows.ps1
+src/main/resources/firebase_config.json

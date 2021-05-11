@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.CodingCalendar.api.DataScrappers.CodeChef.CodeChef;
 import com.CodingCalendar.api.DataScrappers.CodeForces.CodeForces;
 import com.CodingCalendar.api.DataScrappers.HackerEarth.HackerEarth;
+import com.CodingCalendar.api.DataScrappers.HackerRank.HackerRank;
 import com.CodingCalendar.api.entities.Contest;
 import com.CodingCalendar.api.entities.ContestRepository;
 
@@ -25,15 +26,21 @@ public class ContestServiceImpl implements ContestService {
 		CodeChef Codechef=new CodeChef();
 		CodeForces Codeforces =new CodeForces();
 		HackerEarth Hackerearth =new HackerEarth();
+		HackerRank Hackerrank =new HackerRank();
 		
 		List<Contest> ContestList = new ArrayList<>();
-		
 		List<Contest> data=new ArrayList<>();
+		
 		data=Codechef.data();
 		ContestList.addAll(data);
+		
 		data=Codeforces.data();
 		ContestList.addAll(data);
+		
 		data=Hackerearth.data();
+		ContestList.addAll(data);
+		
+		data=Hackerrank.data();
 		ContestList.addAll(data);
 		
 		
@@ -66,6 +73,13 @@ public class ContestServiceImpl implements ContestService {
 
 	}
 
+	@Override
+	public List<Contest> getHackerrank() {
+		HackerRank Hackerrank =new HackerRank();
+		
+		return Hackerrank.data();
+
+	}
 	
 	int f;
 	@Override
@@ -80,7 +94,6 @@ public class ContestServiceImpl implements ContestService {
 				data.forEach((d)->{
 				if(d.getName().equals(i.getName()))
 				{
-					System.out.println("equal");
 					f=1;
 					
 				}});

@@ -18,34 +18,7 @@ import com.goebl.david.Webb;
 
 public class CodeChef {
 
-//  public List < Contest > Data_old() 
-//  {
-//    
-//	  WebDriverCreator drivercreator = new WebDriverCreator();
-//    WebDriver driver = drivercreator.CreateDriver();
-//
-//    String url = "https://codechef.com/contests";
-//    driver.get(url);
-//
-//    WebElement contests = driver.findElement(By.id("present-contests-data"));
-//    List < WebElement > contest = contests.findElements(By.tagName("td"));
-//    List < Contest > ContestList;
-//    ContestList = new ArrayList < > ();
-//    for (int i = 0; i < contest.size(); i += 4) {
-//    	 String Name = contest.get(i + 1).getText();
-//		 Date Start_date =Format_Date(contest.get(i + 2).getText());
-//		 Date End_date = Format_Date(contest.get(i + 3).getText());
-//		 //ContestList.add(new Contest("CodeChef", Name ,Start_date , End_date));
-//
-//    }
-//
-//    driver.close();
-//
-//    return ContestList;
-//
-//  }
 
- 
   
 
   public List<Contest> data()
@@ -62,7 +35,7 @@ public class CodeChef {
 		          .asJsonObject()
 		          .getBody();
 		
-		JSONObject resultp=convert_2_simplejson(response);
+		JSONObject resultp=convert_2_simplejson(response,"result");
 		
 		
 		 response = webb                                                       
@@ -74,7 +47,7 @@ public class CodeChef {
 		          .asJsonObject()
 		          .getBody();
 		
-		 JSONObject resultf=convert_2_simplejson(response);
+		 JSONObject resultf=convert_2_simplejson(response,"result");
 		 
 		 
 		 List<Contest>PresentContest=getContests(resultp);
@@ -118,7 +91,7 @@ public class CodeChef {
 		JSONObject data =(JSONObject) Response.get("data");
 		JSONObject content= (JSONObject)data.get("content");
 		JSONArray contestArray =(JSONArray) content.get("contestList");
-		System.out.println(contestArray);
+		
 		List<Contest> ContestList=new ArrayList<>();
 		 for(int i=0;i<contestArray.size();i++)
 		 {
@@ -161,7 +134,7 @@ public class CodeChef {
 	          .asJsonObject()
 	          .getBody();
 		
-			JSONObject result=convert_2_simplejson(response);
+			JSONObject result=convert_2_simplejson(response,"result");
 	
 			
 			JSONObject data = (JSONObject) result.get("data");
@@ -172,12 +145,12 @@ public class CodeChef {
   } 
 	  
 		
-  public JSONObject convert_2_simplejson(org.json.JSONObject responsetmp)
+  public JSONObject convert_2_simplejson(org.json.JSONObject responsetmp,String key)
 		{
 			String responsestr=null;
 			
 			try {
-				responsestr = responsetmp.getString("result");
+				responsestr = responsetmp.getString(key);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

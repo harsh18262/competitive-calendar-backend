@@ -16,6 +16,7 @@ public interface ContestService {
 	public List<Contest> getCodechef();
 	public List<Contest> getCodeforces();
 	public List<Contest> getHackerearth();
+	public List<Contest> getHackerrank();
 	public String updatetables(Iterable < Contest > ContestList);
 	
 
