@@ -45,14 +45,15 @@ public class ApiController {
 	}
 	
 	@GetMapping("/test")
-	public List<Contest> test() 
+	public Iterable<Contest> test() 
 	{
 		CodeChef codechef = new CodeChef(); 
 		CodeForces codeforce = new CodeForces();
 		HackerEarth hackerearth =new HackerEarth();
 		HackerRank hackerrank =new HackerRank();
 		
-		return hackerrank.data();
+		
+		return contestService.getallContests();
 		
 	}
 	

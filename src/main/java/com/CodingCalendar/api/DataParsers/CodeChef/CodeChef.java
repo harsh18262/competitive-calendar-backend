@@ -1,7 +1,5 @@
 package com.CodingCalendar.api.DataParsers.CodeChef;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -9,17 +7,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.json.JSONException;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
+
+
+import com.CodingCalendar.api.DataParsers.DataParsersutil;
 import com.CodingCalendar.api.entities.Contest;
 import com.goebl.david.Webb;
 
 public class CodeChef {
 
 
-  
+	DataParsersutil datautils = new DataParsersutil();
 
   public List<Contest> data()
   {
@@ -35,7 +35,7 @@ public class CodeChef {
 		          .asJsonObject()
 		          .getBody();
 		
-		JSONObject resultp=convert_2_simplejson(response,"result");
+		JSONObject resultp=(JSONObject)datautils.convert_2_simplejson(response,"result");
 		
 		
 		 response = webb                                                       
@@ -47,7 +47,7 @@ public class CodeChef {
 		          .asJsonObject()
 		          .getBody();
 		
-		 JSONObject resultf=convert_2_simplejson(response,"result");
+		 JSONObject resultf=(JSONObject)datautils.convert_2_simplejson(response,"result");
 		 
 		 
 		 List<Contest>PresentContest=getContests(resultp);
@@ -92,14 +92,15 @@ public class CodeChef {
 		JSONObject content= (JSONObject)data.get("content");
 		JSONArray contestArray =(JSONArray) content.get("contestList");
 		
+		String date_format="yyyy-MM-dd HH:mm:ss";//2021-05-24 00:00:00
 		List<Contest> ContestList=new ArrayList<>();
 		 for(int i=0;i<contestArray.size();i++)
 		 {
 
 			 JSONObject contest = (JSONObject)contestArray.get(i);
 			 String Name = (String) contest.get("name");
-			 Date Start_date = Format_Date((String)contest.get("startDate"));
-			 Date End_date = Format_Date((String)contest.get("endDate"));
+			 Date Start_date = datautils.Format_Date((String)contest.get("startDate"),date_format);
+			 Date End_date = datautils.Format_Date((String)contest.get("endDate"),date_format);
 			 String Code = "https://codechef.com/"+(String)contest.get("code");
 			 ContestList.add(new Contest("CodeChef", Name, Start_date,End_date,Code));
 			
@@ -134,7 +135,7 @@ public class CodeChef {
 	          .asJsonObject()
 	          .getBody();
 		
-			JSONObject result=convert_2_simplejson(response,"result");
+			JSONObject result=(JSONObject)datautils.convert_2_simplejson(response,"result");
 	
 			
 			JSONObject data = (JSONObject) result.get("data");
@@ -145,42 +146,8 @@ public class CodeChef {
   } 
 	  
 		
-  public JSONObject convert_2_simplejson(org.json.JSONObject responsetmp,String key)
-		{
-			String responsestr=null;
-			
-			try {
-				responsestr = responsetmp.getString(key);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-			
-			
-			JSONObject responseobj=(JSONObject) JSONValue.parse(responsestr);
-			
-			return responseobj;
-		}
-		
-  public Date Format_Date(String datestr)
-		{
-			
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//2021-05-24 00:00:00
-			//formatter.setTimeZone(TimeZone.getTimeZone("IST"));
-		 	Date date;
-			try {
-				date = formatter.parse(datestr);
-				return date;
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return null;
-			}
-			 
-		 	
-		 	
-		 	
-			
-		}
+  
+
 	  
   }
 
