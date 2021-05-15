@@ -3,10 +3,13 @@ package com.CodingCalendar.api.Controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +23,7 @@ import com.CodingCalendar.api.DataParsers.HackerRank.HackerRank;
 import com.CodingCalendar.api.entities.Contest;
 import com.CodingCalendar.api.entities.ContestRepository;
 import com.CodingCalendar.api.services.ContestService;
+import com.sun.xml.bind.v2.model.core.ID;
 
 
 
@@ -63,12 +67,21 @@ public class ApiController {
 		
 		return contestRepo.findAll();
 	}
-	@GetMapping("/sqltest/delete")
+	
+	@DeleteMapping("/sqltest/deleteall")
 	 public @ResponseBody String deleteallcontests() 
 	{
 		
 		 contestRepo.deleteAll();
 		 return "Deleted all the entries";
+	}
+	@DeleteMapping("/sqltest/delete")
+	 public @ResponseBody String delete(@RequestParam("id") int id) 
+	{
+		 
+		 contestRepo.deleteById(id);
+		 
+		 return "Deleted" ;
 	}
 	
 	
