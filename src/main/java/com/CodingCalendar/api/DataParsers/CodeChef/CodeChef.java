@@ -1,4 +1,4 @@
-package com.CodingCalendar.api.CodeChef;
+package com.CodingCalendar.api.DataParsers.CodeChef;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,60 +13,15 @@ import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import com.CodingCalendar.api.WebDriverCreator;
 import com.CodingCalendar.api.entities.Contest;
 import com.goebl.david.Webb;
 
-public class CodeChefDataScrapper {
+public class CodeChef {
 
-  public List < Contest > Data_old() 
-  {
-    
-	  WebDriverCreator drivercreator = new WebDriverCreator();
-    WebDriver driver = drivercreator.CreateDriver();
 
-    String url = "https://codechef.com/contests";
-    driver.get(url);
-
-    WebElement contests = driver.findElement(By.id("present-contests-data"));
-    List < WebElement > contest = contests.findElements(By.tagName("td"));
-    List < Contest > ContestList;
-    ContestList = new ArrayList < > ();
-    for (int i = 0; i < contest.size(); i += 4) {
-    	 String Name = contest.get(i + 1).getText();
-		 Date Start_date =Format_Date(contest.get(i + 2).getText());
-		 Date End_date = Format_Date(contest.get(i + 3).getText());
-		 //ContestList.add(new Contest("CodeChef", Name ,Start_date , End_date));
-
-    }
-
-    driver.close();
-
-    return ContestList;
-
-  }
-
-  public Date Format_Date(String strdate) 
-  {
-	  	SimpleDateFormat formatter1=new SimpleDateFormat("dd MMM yyy\nHH:mm:ss");  
-	    Date date;
-	    date=null;
-		try {
-			date = formatter1.parse(strdate);
-			return date;
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return date;
-		}
-  }
   
 
-  public List<Contest> Data_api()
+  public List<Contest> data()
   {
 	  Webb webb =Webb.create();
 	  String token= "Bearer "+ token_gen();
@@ -80,7 +35,7 @@ public class CodeChefDataScrapper {
 		          .asJsonObject()
 		          .getBody();
 		
-		JSONObject resultp=convert_2_simplejson(response);
+		JSONObject resultp=convert_2_simplejson(response,"result");
 		
 		
 		 response = webb                                                       
@@ -92,11 +47,11 @@ public class CodeChefDataScrapper {
 		          .asJsonObject()
 		          .getBody();
 		
-		 JSONObject resultf=convert_2_simplejson(response);
+		 JSONObject resultf=convert_2_simplejson(response,"result");
 		 
 		 
-		 List<Contest>PresentContest=GetContests(resultp);
-		 List<Contest>FutureContest=GetContests(resultf);
+		 List<Contest>PresentContest=getContests(resultp);
+		 List<Contest>FutureContest=getContests(resultf);
 		 List<Contest> ContestList = Stream.of(PresentContest, FutureContest)
                  .flatMap(Collection::stream)
                  .collect(Collectors.toList());
@@ -108,7 +63,7 @@ public class CodeChefDataScrapper {
   }
   
   
-  public  List<Contest> GetContests(JSONObject Response)
+  public  List<Contest> getContests(JSONObject Response)
   {
 	  
 /*	  "result": {
@@ -136,15 +91,16 @@ public class CodeChefDataScrapper {
 		JSONObject data =(JSONObject) Response.get("data");
 		JSONObject content= (JSONObject)data.get("content");
 		JSONArray contestArray =(JSONArray) content.get("contestList");
+		
 		List<Contest> ContestList=new ArrayList<>();
 		 for(int i=0;i<contestArray.size();i++)
 		 {
 
 			 JSONObject contest = (JSONObject)contestArray.get(i);
 			 String Name = (String) contest.get("name");
-			 Date Start_date = format_date((String)contest.get("startDate"));
-			 Date End_date = format_date((String)contest.get("endDate"));
-			 String Code = (String)contest.get("code");
+			 Date Start_date = Format_Date((String)contest.get("startDate"));
+			 Date End_date = Format_Date((String)contest.get("endDate"));
+			 String Code = "https://codechef.com/"+(String)contest.get("code");
 			 ContestList.add(new Contest("CodeChef", Name, Start_date,End_date,Code));
 			
 		 }
@@ -178,7 +134,7 @@ public class CodeChefDataScrapper {
 	          .asJsonObject()
 	          .getBody();
 		
-			JSONObject result=convert_2_simplejson(response);
+			JSONObject result=convert_2_simplejson(response,"result");
 	
 			
 			JSONObject data = (JSONObject) result.get("data");
@@ -189,12 +145,12 @@ public class CodeChefDataScrapper {
   } 
 	  
 		
-  public JSONObject convert_2_simplejson(org.json.JSONObject responsetmp)
+  public JSONObject convert_2_simplejson(org.json.JSONObject responsetmp,String key)
 		{
 			String responsestr=null;
 			
 			try {
-				responsestr = responsetmp.getString("result");
+				responsestr = responsetmp.getString(key);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -205,10 +161,11 @@ public class CodeChefDataScrapper {
 			return responseobj;
 		}
 		
-  public Date format_date(String datestr)
+  public Date Format_Date(String datestr)
 		{
 			
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//2021-05-24 00:00:00
+			//formatter.setTimeZone(TimeZone.getTimeZone("IST"));
 		 	Date date;
 			try {
 				date = formatter.parse(datestr);

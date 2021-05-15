@@ -1,13 +1,16 @@
 package com.CodingCalendar.api.services;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.CodingCalendar.api.CodeChef.CodeChefDataScrapper;
-import com.CodingCalendar.api.CodeForces.CodeForcesDataScrapper;
+import com.CodingCalendar.api.DataParsers.CodeChef.CodeChef;
+import com.CodingCalendar.api.DataParsers.CodeForces.CodeForces;
+import com.CodingCalendar.api.DataParsers.HackerEarth.HackerEarth;
+import com.CodingCalendar.api.DataParsers.HackerRank.HackerRank;
 import com.CodingCalendar.api.entities.Contest;
 import com.CodingCalendar.api.entities.ContestRepository;
 
@@ -19,33 +22,69 @@ public class ContestServiceImpl implements ContestService {
 	private ContestRepository contestRepo;
 	
 	@Override
-	public Iterable<Contest> getContests() {
-		CodeChefDataScrapper Data=new CodeChefDataScrapper();
+	public List<Contest> getallContests() {
+		CodeChef Codechef=new CodeChef();
+		CodeForces Codeforces =new CodeForces();
+		HackerEarth Hackerearth =new HackerEarth();
+		HackerRank Hackerrank =new HackerRank();
 		
-		List<Contest> list=Data.Data_api();
-		Iterable<Contest> iterablelist=list;
+		List<Contest> ContestList = new ArrayList<>();
+		List<Contest> data=new ArrayList<>();
+		
+		data=Codechef.data();
+		ContestList.addAll(data);
+		
+		data=Codeforces.data();
+		ContestList.addAll(data);
+		
+		data=Hackerearth.data();
+		ContestList.addAll(data);
+		
+		data=Hackerrank.data();
+		ContestList.addAll(data);
+		
+		
+		
+		
 	
-		return iterablelist;
+		return ContestList;
 	}
 
 	@Override
 	public List<Contest> getCodechef() {
-		CodeChefDataScrapper Codechef= new CodeChefDataScrapper();
+		CodeChef Codechef= new CodeChef();
 		
-		return Codechef.Data_api();
+		return Codechef.data();
 	}
 
 	@Override
 	public List<Contest> getCodeforces() {
-		CodeForcesDataScrapper CodeForces =new CodeForcesDataScrapper();
+		CodeForces Codeforces =new CodeForces();
 		
-		return CodeForces.Data_new();
+		return Codeforces.data();
 		
+	}
+	
+	@Override
+	public List<Contest> getHackerearth() {
+		HackerEarth Hackerearth =new HackerEarth();
+		
+		return Hackerearth.data();
+
+	}
+
+	@Override
+	public List<Contest> getHackerrank() {
+		HackerRank Hackerrank =new HackerRank();
+		
+		return Hackerrank.data();
+
 	}
 	
 	int f;
 	@Override
-	public String updatetables(Iterable < Contest > ContestList) {
+	public String updatetables(Iterable < Contest > ContestList) 
+	{
 		Iterable < Contest > data;
 	
 		data=contestRepo.findAll();
@@ -56,7 +95,6 @@ public class ContestServiceImpl implements ContestService {
 				data.forEach((d)->{
 				if(d.getName().equals(i.getName()))
 				{
-					System.out.println("equal");
 					f=1;
 					
 				}});
@@ -68,5 +106,8 @@ public class ContestServiceImpl implements ContestService {
 		});
 		return "Updated";
 	}
+
+
+
 
 }

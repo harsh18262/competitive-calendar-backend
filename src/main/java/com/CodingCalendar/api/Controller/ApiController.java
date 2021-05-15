@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.CodingCalendar.api.CodeChef.CodeChefDataScrapper;
-import com.CodingCalendar.api.CodeForces.CodeForcesDataScrapper;
+import com.CodingCalendar.api.DataParsers.CodeChef.CodeChef;
+import com.CodingCalendar.api.DataParsers.CodeForces.CodeForces;
+import com.CodingCalendar.api.DataParsers.HackerEarth.HackerEarth;
+import com.CodingCalendar.api.DataParsers.HackerRank.HackerRank;
 import com.CodingCalendar.api.entities.Contest;
 import com.CodingCalendar.api.entities.ContestRepository;
 import com.CodingCalendar.api.services.ContestService;
@@ -45,10 +47,12 @@ public class ApiController {
 	@GetMapping("/test")
 	public List<Contest> test() 
 	{
-		CodeChefDataScrapper codechef = new CodeChefDataScrapper(); 
-		CodeForcesDataScrapper codeforce = new CodeForcesDataScrapper();
+		CodeChef codechef = new CodeChef(); 
+		CodeForces codeforce = new CodeForces();
+		HackerEarth hackerearth =new HackerEarth();
+		HackerRank hackerrank =new HackerRank();
 		
-		return codeforce.Data_new();
+		return hackerrank.data();
 		
 	}
 	
@@ -83,8 +87,19 @@ public class ApiController {
 		{
 			ContestList = contestService.getCodeforces();	
 		}
-		else
+		else if(Platform.equalsIgnoreCase("hackerearth"))
 		{
+			ContestList = contestService.getHackerearth();	
+		}
+		else if(Platform.equalsIgnoreCase("hackerrank"))
+		{
+			ContestList = contestService.getHackerearth();	
+		}
+		else if(Platform.equalsIgnoreCase("all"))
+		{
+			ContestList = contestService.getallContests();	
+		} 
+		else {
 			return "Platform not found or Wrong parameter";
 		}
 		
