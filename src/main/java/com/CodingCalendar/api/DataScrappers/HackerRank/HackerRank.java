@@ -23,8 +23,6 @@ public class HackerRank {
 		org.json.JSONObject response = webb                                                       
 		          .get(url)
 		          .header("user-agent" , "PostmanRuntime/7.28.0")
-		          //.header("Host", "www.hackerrank.com")
-		         // .header("authority", "www.hackerrank.com")
 		          .ensureSuccess()
 		          .asJsonObject()
 		          .getBody();

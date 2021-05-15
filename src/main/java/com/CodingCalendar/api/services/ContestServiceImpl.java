@@ -83,7 +83,8 @@ public class ContestServiceImpl implements ContestService {
 	
 	int f;
 	@Override
-	public String updatetables(Iterable < Contest > ContestList) {
+	public String updatetables(Iterable < Contest > ContestList) 
+	{
 		Iterable < Contest > data;
 	
 		data=contestRepo.findAll();
