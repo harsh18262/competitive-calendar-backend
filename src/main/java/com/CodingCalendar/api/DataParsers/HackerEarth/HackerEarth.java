@@ -1,4 +1,4 @@
-package com.CodingCalendar.api.DataScrappers.HackerEarth;
+package com.CodingCalendar.api.DataParsers.HackerEarth;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

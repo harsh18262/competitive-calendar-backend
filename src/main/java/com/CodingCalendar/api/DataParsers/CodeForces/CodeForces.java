@@ -1,4 +1,4 @@
-package com.CodingCalendar.api.DataScrappers.CodeForces;
+package com.CodingCalendar.api.DataParsers.CodeForces;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

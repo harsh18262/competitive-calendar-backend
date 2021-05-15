@@ -1,4 +1,4 @@
-package com.CodingCalendar.api.DataScrappers.HackerRank;
+package com.CodingCalendar.api.DataParsers.HackerRank;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

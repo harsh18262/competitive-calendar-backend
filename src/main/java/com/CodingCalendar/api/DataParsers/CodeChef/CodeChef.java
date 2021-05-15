@@ -1,4 +1,4 @@
-package com.CodingCalendar.api.DataScrappers.CodeChef;
+package com.CodingCalendar.api.DataParsers.CodeChef;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

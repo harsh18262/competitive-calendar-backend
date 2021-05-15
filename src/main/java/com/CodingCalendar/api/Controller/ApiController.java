@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.CodingCalendar.api.DataScrappers.CodeChef.CodeChef;
-import com.CodingCalendar.api.DataScrappers.CodeForces.CodeForces;
-import com.CodingCalendar.api.DataScrappers.HackerEarth.HackerEarth;
-import com.CodingCalendar.api.DataScrappers.HackerRank.HackerRank;
+import com.CodingCalendar.api.DataParsers.CodeChef.CodeChef;
+import com.CodingCalendar.api.DataParsers.CodeForces.CodeForces;
+import com.CodingCalendar.api.DataParsers.HackerEarth.HackerEarth;
+import com.CodingCalendar.api.DataParsers.HackerRank.HackerRank;
 import com.CodingCalendar.api.entities.Contest;
 import com.CodingCalendar.api.entities.ContestRepository;
 import com.CodingCalendar.api.services.ContestService;

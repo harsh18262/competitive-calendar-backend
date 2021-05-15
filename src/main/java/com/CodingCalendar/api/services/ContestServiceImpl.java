@@ -7,10 +7,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.CodingCalendar.api.DataScrappers.CodeChef.CodeChef;
-import com.CodingCalendar.api.DataScrappers.CodeForces.CodeForces;
-import com.CodingCalendar.api.DataScrappers.HackerEarth.HackerEarth;
-import com.CodingCalendar.api.DataScrappers.HackerRank.HackerRank;
+import com.CodingCalendar.api.DataParsers.CodeChef.CodeChef;
+import com.CodingCalendar.api.DataParsers.CodeForces.CodeForces;
+import com.CodingCalendar.api.DataParsers.HackerEarth.HackerEarth;
+import com.CodingCalendar.api.DataParsers.HackerRank.HackerRank;
 import com.CodingCalendar.api.entities.Contest;
 import com.CodingCalendar.api.entities.ContestRepository;
 
