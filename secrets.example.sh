@@ -1,0 +1,8 @@
+export MYSQL_SERVER=
+export MYSQL_DATABASE=
+export MYSQL_USER=
+export MYSQL_PASS=
+export CODEFORCES_KEY=
+export CODEFORCES_SECRET=
+export CODECHEF_ID=
+export CODECHEF_SECRET=
