@@ -2,14 +2,12 @@ package com.CodingCalendar.api.Controller;
 
 
 
-import java.util.ArrayList;
+
 import java.util.List;
 
-import org.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +25,7 @@ import com.CodingCalendar.api.entities.ContestRepository;
 import com.CodingCalendar.api.entities.Last_updated;
 import com.CodingCalendar.api.entities.Last_updated_Repository;
 import com.CodingCalendar.api.services.ContestService;
-import com.google.firebase.database.utilities.Pair;
+
 
 
 
@@ -36,7 +34,6 @@ import com.google.firebase.database.utilities.Pair;
 
 @RestController
 @CrossOrigin(origins = "*")
-@PropertySource("classpath:application.properties")
 public class ApiController {
 	
 	@Autowired
