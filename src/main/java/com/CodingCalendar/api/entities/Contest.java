@@ -5,6 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.util.Date;
 
 @Entity
@@ -23,8 +27,28 @@ public class Contest {
 	private Date Start_time;
 	private Date End_time;
 	private String Url;
+	
+    @CreationTimestamp
+    private Date createDateTime;
+ 
+    @UpdateTimestamp
+    private Date updateDateTime;
+    
 	public Integer getId() {
 		return id;
+	}
+
+	public Date getCreateDateTime() {
+		return createDateTime;
+	}
+	public void setCreateDateTime(Date createDateTime) {
+		this.createDateTime = createDateTime;
+	}
+	public Date getUpdateDateTime() {
+		return updateDateTime;
+	}
+	public void setUpdateDateTime(Date updateDateTime) {
+		this.updateDateTime = updateDateTime;
 	}
 	public void setId(Integer id) {
 		this.id = id;
@@ -59,6 +83,7 @@ public class Contest {
 	public void setUrl(String url) {
 		Url = url;
 	}
+
 	public Contest(String platform, String name, Date start_time, Date end_time, String url) {
 		super();
 		Platform = platform;
@@ -66,15 +91,9 @@ public class Contest {
 		Start_time = start_time;
 		End_time = end_time;
 		Url = url;
+		
 	}
-	@Override
-	public String toString() {
-		return "Contest [id=" + id + ", Platform=" + Platform + ", Name=" + Name + ", Start_time=" + Start_time
-				+ ", End_time=" + End_time + ", Url=" + Url + ", getId()=" + getId() + ", getPlatform()="
-				+ getPlatform() + ", getName()=" + getName() + ", getStart_time()=" + getStart_time()
-				+ ", getEnd_time()=" + getEnd_time() + ", getUrl()=" + getUrl() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
-	}
-
+	
+	
 		
 }

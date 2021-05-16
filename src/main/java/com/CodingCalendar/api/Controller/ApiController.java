@@ -2,11 +2,13 @@ package com.CodingCalendar.api.Controller;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,8 +24,12 @@ import com.CodingCalendar.api.DataParsers.HackerEarth.HackerEarth;
 import com.CodingCalendar.api.DataParsers.HackerRank.HackerRank;
 import com.CodingCalendar.api.entities.Contest;
 import com.CodingCalendar.api.entities.ContestRepository;
+import com.CodingCalendar.api.entities.Last_updated;
+import com.CodingCalendar.api.entities.Last_updated_Repository;
 import com.CodingCalendar.api.services.ContestService;
-import com.sun.xml.bind.v2.model.core.ID;
+import com.google.firebase.database.utilities.Pair;
+
+
 
 
 
@@ -37,6 +43,8 @@ public class ApiController {
 	private ContestService contestService;
 	@Autowired
 	private ContestRepository contestRepo;
+	@Autowired
+	private Last_updated_Repository timeRepo;
 
 	
 	@GetMapping("/codechef")
@@ -65,9 +73,14 @@ public class ApiController {
 	 public @ResponseBody Iterable<Contest> getAllcontests() 
 	{
 		
-		return contestRepo.findAll();
+		return  contestRepo.findAll();
 	}
-	
+	@GetMapping("/sqltest/gettime")
+	public Iterable<Last_updated> lastupdated()
+	{
+		return timeRepo.findAll();
+		
+	}
 	@DeleteMapping("/sqltest/deleteall")
 	 public @ResponseBody String deleteallcontests() 
 	{
