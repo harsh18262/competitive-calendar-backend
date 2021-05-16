@@ -2,11 +2,14 @@ package com.CodingCalendar.api.Controller;
 
 
 
+
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,20 +22,26 @@ import com.CodingCalendar.api.DataParsers.HackerEarth.HackerEarth;
 import com.CodingCalendar.api.DataParsers.HackerRank.HackerRank;
 import com.CodingCalendar.api.entities.Contest;
 import com.CodingCalendar.api.entities.ContestRepository;
+import com.CodingCalendar.api.entities.Last_updated;
+import com.CodingCalendar.api.entities.Last_updated_Repository;
 import com.CodingCalendar.api.services.ContestService;
+
+
+
 
 
 
 
 @RestController
 @CrossOrigin(origins = "*")
-@PropertySource("classpath:application.properties")
 public class ApiController {
 	
 	@Autowired
 	private ContestService contestService;
 	@Autowired
 	private ContestRepository contestRepo;
+	@Autowired
+	private Last_updated_Repository timeRepo;
 
 	
 	@GetMapping("/codechef")
@@ -45,14 +54,15 @@ public class ApiController {
 	}
 	
 	@GetMapping("/test")
-	public List<Contest> test() 
+	public Iterable<Contest> test() 
 	{
 		CodeChef codechef = new CodeChef(); 
 		CodeForces codeforce = new CodeForces();
 		HackerEarth hackerearth =new HackerEarth();
 		HackerRank hackerrank =new HackerRank();
 		
-		return hackerrank.data();
+		
+		return contestService.getallContests();
 		
 	}
 	
@@ -60,14 +70,28 @@ public class ApiController {
 	 public @ResponseBody Iterable<Contest> getAllcontests() 
 	{
 		
-		return contestRepo.findAll();
+		return  contestRepo.findAll();
 	}
-	@GetMapping("/sqltest/delete")
+	@GetMapping("/sqltest/gettime")
+	public Iterable<Last_updated> lastupdated()
+	{
+		return timeRepo.findAll();
+		
+	}
+	@DeleteMapping("/sqltest/deleteall")
 	 public @ResponseBody String deleteallcontests() 
 	{
 		
 		 contestRepo.deleteAll();
 		 return "Deleted all the entries";
+	}
+	@DeleteMapping("/sqltest/delete")
+	 public @ResponseBody String delete(@RequestParam("id") int id) 
+	{
+		 
+		 contestRepo.deleteById(id);
+		 
+		 return "Deleted" ;
 	}
 	
 	

@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
 
 import com.CodingCalendar.api.DataParsers.CodeChef.CodeChef;
 import com.CodingCalendar.api.DataParsers.CodeForces.CodeForces;
@@ -13,6 +15,8 @@ import com.CodingCalendar.api.DataParsers.HackerEarth.HackerEarth;
 import com.CodingCalendar.api.DataParsers.HackerRank.HackerRank;
 import com.CodingCalendar.api.entities.Contest;
 import com.CodingCalendar.api.entities.ContestRepository;
+import com.CodingCalendar.api.entities.Last_updated;
+import com.CodingCalendar.api.entities.Last_updated_Repository;
 
 @Service
 public class ContestServiceImpl implements ContestService {
@@ -20,6 +24,9 @@ public class ContestServiceImpl implements ContestService {
 	
 	@Autowired
 	private ContestRepository contestRepo;
+	
+	@Autowired
+	private Last_updated_Repository timerepo;
 	
 	@Override
 	public List<Contest> getallContests() {
@@ -104,6 +111,12 @@ public class ContestServiceImpl implements ContestService {
 					contestRepo.save(n);
 				}			
 		});
+		LocalDateTime now=LocalDateTime.now();
+				
+		Last_updated time = timerepo.findById(325).get(); 
+		time.setUpdate_timestamp(now); 
+		timerepo.save(time);
+		
 		return "Updated";
 	}
 
