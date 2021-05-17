@@ -98,11 +98,13 @@ public class CodeChef {
 		 {
 
 			 JSONObject contest = (JSONObject)contestArray.get(i);
+			 String Platform ="CodeChef";
 			 String Name = (String) contest.get("name");
 			 Date Start_date = datautils.Format_Date((String)contest.get("startDate"),date_format);
 			 Date End_date = datautils.Format_Date((String)contest.get("endDate"),date_format);
-			 String Code = "https://codechef.com/"+(String)contest.get("code");
-			 ContestList.add(new Contest("CodeChef", Name, Start_date,End_date,Code));
+			 String Url = "https://codechef.com/"+(String)contest.get("code");
+			 String Phase=datautils.check_Phase(Start_date, End_date);
+			 ContestList.add(new Contest(Platform, Name, Start_date,End_date,Url,Phase));
 			
 		 }
 		

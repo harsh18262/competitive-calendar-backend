@@ -27,6 +27,7 @@ public class Contest {
 	private Date Start_time;
 	private Date End_time;
 	private String Url;
+	private String Phase;
 	
     @CreationTimestamp
     private Date createDateTime;
@@ -84,14 +85,23 @@ public class Contest {
 		Url = url;
 	}
 
-	public Contest(String platform, String name, Date start_time, Date end_time, String url) {
+	public Contest(String platform, String name, Date start_time, Date end_time, String url,String phase) {
 		super();
 		Platform = platform;
 		Name = name;
 		Start_time = start_time;
 		End_time = end_time;
 		Url = url;
+		Phase = phase;
 		
+	}
+
+	public String getPhase() {
+		return Phase;
+	}
+
+	public void setPhase(String phase) {
+		Phase = phase;
 	}
 	
 	

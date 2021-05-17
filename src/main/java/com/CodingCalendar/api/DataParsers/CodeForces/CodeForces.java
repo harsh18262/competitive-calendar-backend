@@ -105,11 +105,13 @@ public class CodeForces {
 				 JSONObject contest = (JSONObject)contestArray.get(i);
 				 if(contest.get("phase").equals("BEFORE")) 
 				 {
-			 	 String Name = (String) contest.get("name");
-				 Date Start_date = datautils.epoch2date((Long)(contest.get("startTimeSeconds")));
-				 Date End_date = datautils.epoch2date( (Long)(contest.get("startTimeSeconds")) + (Long)(contest.get("durationSeconds")));
-				 String Code ="https://codeforces.com/contestRegistration/"+(contest.get("id").toString());
-				 ContestList.add(new Contest("CodeForces", Name, Start_date,End_date,Code));
+					 String Platform="Codeforces";
+					 String Name = (String) contest.get("name");
+					 Date Start_date = datautils.epoch2date((Long)(contest.get("startTimeSeconds")));
+					 Date End_date = datautils.epoch2date( (Long)(contest.get("startTimeSeconds")) + (Long)(contest.get("durationSeconds")));
+					 String Url ="https://codeforces.com/contestRegistration/"+(contest.get("id").toString());
+					 String Phase=datautils.check_Phase(Start_date, End_date);
+					 ContestList.add(new Contest(Platform, Name, Start_date,End_date,Url,Phase));
 				 }
 				
 			 }

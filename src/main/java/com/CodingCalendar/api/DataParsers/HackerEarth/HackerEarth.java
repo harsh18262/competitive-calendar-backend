@@ -39,11 +39,13 @@ public class HackerEarth {
 				 JSONObject contest = (JSONObject)contestArray.get(i);
 				 if(contest.get("status").equals("ONGOING")||contest.get("status").equals("UPCOMING")) 
 				 {
-			 	 String Name = (String) contest.get("title");
-				 Date Start_date = datautils.Format_Date((String)contest.get("start_utc_tz"),date_format);
-				 Date End_date = datautils.Format_Date((String)contest.get("end_utc_tz"),date_format);
-				 String Code =(contest.get("url").toString());
-				 ContestList.add(new Contest("Hackerearth", Name, Start_date,End_date,Code));
+					 String Platform="Hackearth";
+					 String Name = (String) contest.get("title");
+					 Date Start_date = datautils.Format_Date((String)contest.get("start_utc_tz"),date_format);
+					 Date End_date = datautils.Format_Date((String)contest.get("end_utc_tz"),date_format);
+					 String Url =(contest.get("url").toString());
+					 String Phase=datautils.check_Phase(Start_date, End_date);
+					 ContestList.add(new Contest(Platform, Name, Start_date,End_date,Url,Phase));
 				 }
 				
 			 }

@@ -3,6 +3,7 @@ package com.CodingCalendar.api.Controller;
 
 
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -60,7 +61,8 @@ public class ApiController {
 		CodeForces codeforce = new CodeForces();
 		HackerEarth hackerearth =new HackerEarth();
 		HackerRank hackerrank =new HackerRank();
-		
+		Date date=new Date();
+		System.out.println(date);
 		
 		return contestService.getallContests();
 		
