@@ -30,24 +30,20 @@ public class ContestServiceImpl implements ContestService {
 	
 	@Override
 	public List<Contest> getallContests() {
-		CodeChef Codechef=new CodeChef();
-		CodeForces Codeforces =new CodeForces();
-		HackerEarth Hackerearth =new HackerEarth();
-		HackerRank Hackerrank =new HackerRank();
 		
 		List<Contest> ContestList = new ArrayList<>();
 		List<Contest> data=new ArrayList<>();
 		
-		data=Codechef.data();
+		data=getCodechef();
 		ContestList.addAll(data);
 		
-		data=Codeforces.data();
+		data=getCodeforces();
 		ContestList.addAll(data);
 		
-		data=Hackerearth.data();
+		data=getHackerearth();
 		ContestList.addAll(data);
 		
-		data=Hackerrank.data();
+		data=getHackerrank();
 		ContestList.addAll(data);
 		
 		
