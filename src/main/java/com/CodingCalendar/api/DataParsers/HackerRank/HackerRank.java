@@ -42,11 +42,13 @@ public class HackerRank {
 			
 			 if(contest.get("ended").equals(false)) 
 			 {
-		 	 String Name = (String) contest.get("name");
-			 Date Start_date = datautils.epoch2date((Long)contest.get("epoch_starttime"));
-			 Date End_date = datautils.epoch2date((Long)contest.get("epoch_endtime"));
-			 String Url ="https://www.hackerrank.com/contests/"+(contest.get("slug").toString());
-			 ContestList.add(new Contest("Hackerrank", Name, Start_date,End_date,Url));
+				 String Platform="Hackerrank";
+				 String Name = (String) contest.get("name");
+				 Date Start_date = datautils.epoch2date((Long)contest.get("epoch_starttime"));
+				 Date End_date = datautils.epoch2date((Long)contest.get("epoch_endtime"));
+				 String Url ="https://www.hackerrank.com/contests/"+(contest.get("slug").toString());
+				 String Phase=datautils.check_Phase(Start_date, End_date);
+				 ContestList.add(new Contest(Platform, Name, Start_date,End_date,Url,Phase));
 			 }
 			 
 		 }

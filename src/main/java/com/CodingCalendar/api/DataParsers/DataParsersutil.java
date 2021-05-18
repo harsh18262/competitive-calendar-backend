@@ -46,6 +46,27 @@ public class DataParsersutil {
 		return date;
  
 	}
+	
+	public String check_Phase(Date start_date,Date end_date)
+	{
+		Date current_time=new Date();
+		String Phase=null;
+		
+		if(start_date.compareTo(current_time)>0)
+		{
+			 Phase="Upcoming";
+		}
+		else if(start_date.compareTo(current_time)<0 && end_date.compareTo(current_time)>0)
+		{
+			 Phase="Running";
+		}
+		else if(end_date.compareTo(current_time)<0)
+		{
+			 Phase="Ended";
+		}
+		
+		return Phase;
+	}
 
 
 }
