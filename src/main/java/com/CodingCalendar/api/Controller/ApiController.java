@@ -8,7 +8,6 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,26 +67,33 @@ public class ApiController {
 		
 	}
 	
-	@GetMapping("/sqltest/get")
+	@GetMapping("/getcontests")
 	 public @ResponseBody Iterable<Contest> getAllcontests() 
 	{
 		
 		return  contestRepo.findAll();
 	}
-	@GetMapping("/sqltest/gettime")
+	@GetMapping("/gettime")
 	public Iterable<Last_updated> lastupdated()
 	{
 		return timeRepo.findAll();
 		
 	}
-	@DeleteMapping("/sqltest/deleteall")
-	 public @ResponseBody String deleteallcontests() 
+	@DeleteMapping("deleteall")
+	 public @ResponseBody String deleteallcontests(@RequestParam("confirmation") String confirm) 
 	{
+		if(confirm.equals("yes")) 
+		{
+			contestRepo.deleteAll();
+		 	return "Deleted all the entries";
+		}
+		else
+		{
+			return "not deleted";
+		}
 		
-		 contestRepo.deleteAll();
-		 return "Deleted all the entries";
 	}
-	@DeleteMapping("/sqltest/delete")
+	@DeleteMapping("/delete")
 	 public @ResponseBody String delete(@RequestParam("id") int id) 
 	{
 		 
@@ -99,7 +105,7 @@ public class ApiController {
 	
 	
 
-	@PostMapping("/sqltest/post")
+	@PostMapping("/update")
 	 public  String update(@RequestParam("platform") String Platform ) 
 	{
 		Iterable <Contest> ContestList; 
@@ -119,7 +125,7 @@ public class ApiController {
 		}
 		else if(Platform.equalsIgnoreCase("hackerrank"))
 		{
-			ContestList = contestService.getHackerearth();	
+			ContestList = contestService.getHackerrank();	
 		}
 		else if(Platform.equalsIgnoreCase("all"))
 		{
