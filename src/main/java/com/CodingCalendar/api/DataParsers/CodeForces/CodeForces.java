@@ -105,7 +105,7 @@ public class CodeForces {
 				 JSONObject contest = (JSONObject)contestArray.get(i);
 				 if(contest.get("phase").equals("BEFORE")) 
 				 {
-					 String Platform="Codeforces";
+					 String Platform="CodeForces";
 					 String Name = (String) contest.get("name");
 					 Date Start_date = datautils.epoch2date((Long)(contest.get("startTimeSeconds")));
 					 Date End_date = datautils.epoch2date( (Long)(contest.get("startTimeSeconds")) + (Long)(contest.get("durationSeconds")));

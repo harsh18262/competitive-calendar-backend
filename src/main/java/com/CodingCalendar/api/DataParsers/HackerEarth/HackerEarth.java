@@ -39,7 +39,7 @@ public class HackerEarth {
 				 JSONObject contest = (JSONObject)contestArray.get(i);
 				 if(contest.get("status").equals("ONGOING")||contest.get("status").equals("UPCOMING")) 
 				 {
-					 String Platform="Hackearth";
+					 String Platform="Hackerearth";
 					 String Name = (String) contest.get("title");
 					 Date Start_date = datautils.Format_Date((String)contest.get("start_utc_tz"),date_format);
 					 Date End_date = datautils.Format_Date((String)contest.get("end_utc_tz"),date_format);
