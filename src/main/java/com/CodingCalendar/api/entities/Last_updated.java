@@ -32,9 +32,9 @@ public class Last_updated {
 
 	@Override
 	public String toString() {
-		return "last_update [update_timestamp=" + update_timestamp + ", getUpdate_timestamp()=" + getUpdate_timestamp()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+		return "Last_updated [id=" + id + ", update_timestamp=" + update_timestamp + ", getUpdate_timestamp()="
+				+ getUpdate_timestamp() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
 	}
 
 	public LocalDateTime getUpdate_timestamp() {

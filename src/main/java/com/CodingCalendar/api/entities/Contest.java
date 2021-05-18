@@ -5,9 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 
 import java.util.Date;
 
@@ -15,6 +18,18 @@ import java.util.Date;
 @Table(name = "competitivecalendarnew")
 public class Contest {
 	
+	@Override
+	public String toString() {
+		return "Contest [id=" + id + ", Platform=" + Platform + ", Name=" + Name + ", Start_time=" + Start_time
+				+ ", End_time=" + End_time + ", Url=" + Url + ", Phase=" + Phase + ", createDateTime=" + createDateTime
+				+ ", updateDateTime=" + updateDateTime + ", getId()=" + getId() + ", getCreateDateTime()="
+				+ getCreateDateTime() + ", getUpdateDateTime()=" + getUpdateDateTime() + ", getPlatform()="
+				+ getPlatform() + ", getName()=" + getName() + ", getStart_time()=" + getStart_time()
+				+ ", getEnd_time()=" + getEnd_time() + ", getUrl()=" + getUrl() + ", getPhase()=" + getPhase()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
+	}
+
 	public Contest() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -24,8 +39,12 @@ public class Contest {
 	private Integer id;
 	private String Platform;
 	private String Name;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date Start_time;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date End_time;
+	
 	private String Url;
 	private String Phase;
 	
@@ -104,6 +123,24 @@ public class Contest {
 		Phase = phase;
 	}
 	
+	public boolean compare(Contest a)
+	{
+		if( a.getName().equals(this.getName())&&
+			a.getStart_time().equals(this.getStart_time())&&
+			a.getEnd_time().equals(this.getEnd_time())&&
+			a.getUrl().equals(this.getUrl())&&
+			a.getPhase().equals(this.getPhase())&&
+			a.getPlatform().equals(this.getPlatform())
+			)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	
+	}
 	
 		
 }
