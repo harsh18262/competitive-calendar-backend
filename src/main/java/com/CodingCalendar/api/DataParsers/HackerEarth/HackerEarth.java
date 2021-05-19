@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.tika.language.detect.LanguageDetector;
+import org.apache.tika.langdetect.OptimaizeLangDetector;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -37,6 +39,9 @@ public class HackerEarth {
 			 {
 
 				 JSONObject contest = (JSONObject)contestArray.get(i);
+				 LanguageDetector l = new OptimaizeLangDetector().loadModels();
+				 String lang=l.detect((String)contest.get("description")).getLanguage();
+				if(lang.equals("en")) {
 				 if(contest.get("status").equals("ONGOING")||contest.get("status").equals("UPCOMING")) 
 				 {
 					 String Platform="Hackerearth";
@@ -47,7 +52,9 @@ public class HackerEarth {
 					 String Phase=datautils.check_Phase(Start_date, End_date);
 					 ContestList.add(new Contest(Platform, Name, Start_date,End_date,Url,Phase));
 				 }
+				 
 				
+			 }
 			 }
 			 return ContestList;
 			
