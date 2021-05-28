@@ -8,6 +8,7 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,16 +55,18 @@ public class ApiController {
 	}
 	
 	@GetMapping("/test")
-	public Iterable<Contest> test() 
+	public Iterable<Contest> test(@RequestParam(name="platform",required = false) String Platform,@RequestParam(name="phase",required = false) String Phase) 
 	{
-		CodeChef codechef = new CodeChef(); 
-		CodeForces codeforce = new CodeForces();
-		HackerEarth hackerearth =new HackerEarth();
-		HackerRank hackerrank =new HackerRank();
-		Date date=new Date();
-		System.out.println(date);
+		if (Platform==null)
+		{
+			Platform="%";
+		}
+		if(Phase==null)
+		{
+			Phase="%";
+		}
 		
-		return contestService.getallContests();
+		return contestRepo.findByPlatform_and_Phase(Platform,Phase);
 		
 	}
 	
