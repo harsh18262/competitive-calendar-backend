@@ -1,4 +1,4 @@
-# competitive-calendar-api
+# competitive-calendar-backend
 The Backend/Internal API microservice for competitve calendar project
 
 ## API Endpoints:
